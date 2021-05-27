@@ -1,0 +1,25 @@
+{% include 'base.html' %}
+
+{% block content %}
+
+    <div class="center-column">
+
+        <form method="post"> {% csrf_token %}
+            {{ form.title }}
+
+            <input type="submit" class="btn btn-primary input" value="Save">
+        </form>
+        {% for obj in object_list %}
+            <div class="item-row">
+                <a class="btn btn-primary btn-sm" href="{{ obj.get_url_update }}"> Update </a>
+                <a class="btn btn-danger btn-sm" href="{{ obj.get_url_delete }}"> Delete </a>
+                {% if obj.complete == True %}
+                    <strike>{{ obj }} </strike>
+                {% else %}
+                    {{ obj }}
+                {% endif %}
+            </div>
+
+        {% endfor %}
+    </div>
+{% endblock %}
